@@ -21,3 +21,6 @@ The Makefile will attempt to install `yojson` via `opam` if missing.
 ## Build
 ```bash
 make
+
+Usage
+./ft_turing machines/unary_add.json "111+11"
