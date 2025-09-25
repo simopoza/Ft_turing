@@ -1,0 +1,47 @@
+{
+  "name": "0n1n_checker",
+  "alphabet": ["0", "1", ".", "X", "y", "n"],
+  "blank": ".",
+  "states": [
+    "mark0", "find1", "rewind", "check_done", "write_yes", "write_no", "HALT"
+  ],
+  "initial": "mark0",
+  "finals": ["HALT"],
+  "transitions": {
+    "mark0": [
+      { "read": "0", "to_state": "find1", "write": "X", "action": "R" },
+      { "read": "X", "to_state": "mark0", "write": "X", "action": "R" },
+      { "read": ".", "to_state": "check_done", "write": ".", "action": "R" },
+      { "read": "1", "to_state": "check_unmarked1", "write": "1", "action": "R" }
+    ],
+    "find1": [
+      { "read": "0", "to_state": "find1", "write": "0", "action": "R" },
+      { "read": "X", "to_state": "find1", "write": "X", "action": "R" },
+      { "read": "1", "to_state": "rewind", "write": "X", "action": "L" },
+      { "read": ".", "to_state": "write_no", "write": ".", "action": "R" }
+    ],
+    "rewind": [
+      { "read": "0", "to_state": "rewind", "write": "0", "action": "L" },
+      { "read": "1", "to_state": "rewind", "write": "1", "action": "L" },
+      { "read": "X", "to_state": "rewind", "write": "X", "action": "L" },
+      { "read": ".", "to_state": "mark0", "write": ".", "action": "R" }
+    ],
+    "check_done": [
+      { "read": "X", "to_state": "check_done", "write": "X", "action": "R" },
+      { "read": ".", "to_state": "write_yes", "write": ".", "action": "R" },
+      { "read": "0", "to_state": "write_no", "write": "0", "action": "R" },
+      { "read": "1", "to_state": "write_no", "write": "1", "action": "R" }
+    ],
+    "check_unmarked1": [
+      { "read": "1", "to_state": "write_no", "write": "1", "action": "R" },
+      { "read": "X", "to_state": "check_unmarked1", "write": "X", "action": "R" },
+      { "read": ".", "to_state": "write_no", "write": ".", "action": "R" }
+    ],
+    "write_yes": [
+      { "read": ".", "to_state": "HALT", "write": "y", "action": "R" }
+    ],
+    "write_no": [
+      { "read": ".", "to_state": "HALT", "write": "n", "action": "R" }
+    ]
+  }
+}

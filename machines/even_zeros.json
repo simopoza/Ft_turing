@@ -1,0 +1,20 @@
+{
+  "name": "even_zeros",
+  "alphabet": [ "0", ".", "y", "n" ],
+  "blank": ".",
+  "states": [ "scan", "toggle", "write_yes", "HALT" ],
+  "initial": "scan",
+  "finals": [ "HALT" ],
+  "transitions": {
+    "scan": [
+      { "read": "0", "to_state": "toggle", "write": ".", "action": "RIGHT" },
+      { "read": ".", "to_state": "write_yes", "write": ".", "action": "RIGHT" }
+    ],
+    "toggle": [
+      { "read": "0", "to_state": "scan", "write": ".", "action": "RIGHT" }
+    ],
+    "write_yes": [
+      { "read": ".", "to_state": "HALT", "write": "y", "action": "RIGHT" }
+    ]
+  }
+}

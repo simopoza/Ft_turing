@@ -1,8 +1,3 @@
-
----
-
-## 📄 `Makefile`
-```make
 OCAMLFIND=ocamlfind
 PKG=yojson
 

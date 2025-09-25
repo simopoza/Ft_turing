@@ -1,0 +1,28 @@
+{
+  "name": "meta_runner_minimal",
+  "alphabet": ["1", "+", "=", "#", ".", "y"],
+  "blank": ".",
+  "states": [
+    "skip_code", "copy_left", "copy_right", "write_result", "HALT"
+  ],
+  "initial": "skip_code",
+  "finals": ["HALT"],
+  "transitions": {
+    "skip_code": [
+      { "read": "#", "to_state": "skip_code", "write": "#", "action": "R" },
+      { "read": "1", "to_state": "copy_left", "write": "1", "action": "R" }
+    ],
+    "copy_left": [
+      { "read": "1", "to_state": "copy_left", "write": "1", "action": "R" },
+      { "read": "+", "to_state": "copy_right", "write": "+", "action": "R" }
+    ],
+    "copy_right": [
+      { "read": "1", "to_state": "copy_right", "write": "1", "action": "R" },
+      { "read": "=", "to_state": "write_result", "write": "=", "action": "R" }
+    ],
+    "write_result": [
+      { "read": "1", "to_state": "write_result", "write": "1", "action": "R" },
+      { "read": ".", "to_state": "HALT", "write": "y", "action": "R" }
+    ]
+  }
+}
